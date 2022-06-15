@@ -13,34 +13,9 @@ namespace RepAlignCheckBoxTableCell {
 
         private void xrCheckBox1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e) {
             string neighborCellText = GetCurrentColumnValue("Content").ToString();
-            Graphics graphics = Graphics.FromHwnd(IntPtr.Zero);
-
-            int neighborCellWidthPixels = ConvertFromReportUnitToPixels(xrTableCell2.WidthF);
-
-            SizeF neighborCellSizePixels = graphics.MeasureString(neighborCellText, xrTableCell2.Font, neighborCellWidthPixels,
-                BrickStringFormat.Create(xrTableCell2.TextAlignment, xrTableCell2.WordWrap).Value);
-
-            graphics.Dispose();
-
-            float neighborCellHeightReportUnits = ConvertFromPixelsToReportUnit((int)Math.Round(neighborCellSizePixels.Height));
-
-            xrCheckBox1.LocationF = new PointF(xrCheckBox1.LocationF.X, neighborCellHeightReportUnits / 2 - xrCheckBox1.SizeF.Height / 2);
+            var neighborCellBounds = BestSizeEstimator.GetBoundsToFitText(xrTableCell2, neighborCellText);
+            xrCheckBox1.LocationF = new PointF(xrCheckBox1.LocationF.X, neighborCellBounds.Height / 2 - xrCheckBox1.SizeF.Height / 2);
         }
-
-        private int ConvertFromReportUnitToPixels(float value) {
-            GraphicsUnit unit = (this.ReportUnit == ReportUnit.HundredthsOfAnInch ? GraphicsUnit.Inch : GraphicsUnit.Millimeter);
-            float multiplier = (unit == GraphicsUnit.Inch ? 100 : 10);
-
-            return (int)Math.Round(GraphicsUnitConverter.Convert(value, unit, GraphicsUnit.Pixel) / multiplier);
-        }
-
-        private float ConvertFromPixelsToReportUnit(int value) {
-            GraphicsUnit unit = (this.ReportUnit == ReportUnit.HundredthsOfAnInch ? GraphicsUnit.Inch : GraphicsUnit.Millimeter);
-            float multiplier = (unit == GraphicsUnit.Inch ? 100 : 10);
-
-            return GraphicsUnitConverter.Convert(value, GraphicsUnit.Pixel, unit) * multiplier;
-        }
-
     }
 
     public class ManualDataSet : DataSet {
@@ -70,7 +45,6 @@ namespace RepAlignCheckBoxTableCell {
             return ds;
         }
 
-        #region Disable Serialization for Tables and Relations
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new DataTableCollection Tables {
             get { return base.Tables; }
@@ -80,7 +54,6 @@ namespace RepAlignCheckBoxTableCell {
         public new DataRelationCollection Relations {
             get { return base.Relations; }
         }
-        #endregion Disable Serialization for Tables and Relations
     }
 
 }
