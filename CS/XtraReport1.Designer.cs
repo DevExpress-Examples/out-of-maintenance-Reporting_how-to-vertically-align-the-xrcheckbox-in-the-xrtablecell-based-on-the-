@@ -105,7 +105,7 @@ namespace RepAlignCheckBoxTableCell
             this.xrCheckBox1.SizeF = new System.Drawing.SizeF(70F, 25F);
             this.xrCheckBox1.StylePriority.UseBorders = false;
             this.xrCheckBox1.Text = "Checked";
-            this.xrCheckBox1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrCheckBox1_BeforePrint);
+            this.xrCheckBox1.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.xrCheckBox1_BeforePrint);
             // 
             // ReportHeader
             // 

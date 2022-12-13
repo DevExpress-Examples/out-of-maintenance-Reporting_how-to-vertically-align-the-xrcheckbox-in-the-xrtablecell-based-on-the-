@@ -92,7 +92,7 @@ Namespace RepAlignCheckBoxTableCell
 			Me.xrCheckBox1.SizeF = New System.Drawing.SizeF(70F, 25F)
 			Me.xrCheckBox1.StylePriority.UseBorders = False
 			Me.xrCheckBox1.Text = "Checked"
-'			Me.xrCheckBox1.BeforePrint += New System.Drawing.Printing.PrintEventHandler(Me.xrCheckBox1_BeforePrint);
+'			Me.xrCheckBox1.BeforePrint += New DevExpress.XtraReports.UI.BeforePrintEventHandler(Me.xrCheckBox1_BeforePrint);
 			' 
 			' ReportHeader
 			' 

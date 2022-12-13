@@ -11,7 +11,7 @@ namespace RepAlignCheckBoxTableCell {
             InitializeComponent();
         }
 
-        private void xrCheckBox1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e) {
+        private void xrCheckBox1_BeforePrint(object sender, System.ComponentModel.CancelEventArgs e) {
             string neighborCellText = GetCurrentColumnValue("Content").ToString();
             var neighborCellBounds = BestSizeEstimator.GetBoundsToFitText(xrTableCell2, neighborCellText);
             xrCheckBox1.LocationF = new PointF(xrCheckBox1.LocationF.X, neighborCellBounds.Height / 2 - xrCheckBox1.SizeF.Height / 2);

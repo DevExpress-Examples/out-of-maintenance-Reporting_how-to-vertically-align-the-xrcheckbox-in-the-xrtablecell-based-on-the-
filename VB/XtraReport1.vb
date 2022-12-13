@@ -13,7 +13,7 @@ Namespace RepAlignCheckBoxTableCell
 			InitializeComponent()
 		End Sub
 
-		Private Sub xrCheckBox1_BeforePrint(ByVal sender As Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles xrCheckBox1.BeforePrint
+		Private Sub xrCheckBox1_BeforePrint(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles xrCheckBox1.BeforePrint
 			Dim neighborCellText As String = GetCurrentColumnValue("Content").ToString()
 			Dim neighborCellBounds As RectangleF = BestSizeEstimator.GetBoundsToFitText(xrTableCell2, neighborCellText)
             xrCheckBox1.LocationF = New PointF(xrCheckBox1.LocationF.X, neighborCellBounds.Height / 2 - xrCheckBox1.SizeF.Height / 2)
